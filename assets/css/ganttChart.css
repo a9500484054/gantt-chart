@@ -1,0 +1,98 @@
+@charset "UTF-8";
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.gantt-chart {
+  background: #fff;
+}
+.gantt-chart__table {
+  position: relative;
+}
+.gantt-chart__head {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  z-index: 99999;
+}
+.gantt-chart__col {
+  transition-duration: 0.5s;
+}
+.gantt-chart__col:hover {
+  background: rgba(211, 211, 211, 0.3215686275);
+}
+.gantt-chart__col--active {
+  position: relative;
+  background: rgba(205, 239, 208, 0.5098039216) !important;
+}
+.gantt-chart__col--active:hover {
+  background: rgba(138, 233, 146, 0.5098039216) !important;
+}
+.gantt-chart__col--active:hover > .gantt-chart__info {
+  display: flex;
+  opacity: 1;
+  z-index: 100;
+}
+.gantt-chart__info {
+  opacity: 0;
+  flex-direction: column;
+  position: absolute;
+  z-index: -1;
+}
+.gantt-chart__info-list li {
+  width: 300px;
+  margin-bottom: 16px;
+}
+.gantt-chart__btn-view {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+  padding: 0;
+  z-index: 999;
+}
+
+.view-card {
+  width: 360px;
+  position: fixed;
+  bottom: -16px;
+  right: 16px;
+  z-index: -1;
+  opacity: 0;
+  transition-duration: 0.5s;
+  z-index: -1;
+}
+.view-card--active {
+  opacity: 1;
+  z-index: 99999;
+}
+.view-card__number {
+  border: none !important;
+  background-color: transparent;
+  font-size: 42px;
+  font-weight: bold;
+  box-shadow: none;
+}
+
+.styled-scrollbars {
+  /* плашка-бегунок и фон */
+  scrollbar-color: #999 #d4d4d4;
+}
+
+.styled-scrollbars::-webkit-scrollbar {
+  width: 8px; /* в основном для вертикальных полос прокрутки */
+  height: 8px; /* в основном для горизонтальных полос прокрутки */
+}
+
+.styled-scrollbars::-webkit-scrollbar-thumb { /* плашка-бегунок */
+  background: #999;
+}
+
+.styled-scrollbars::-webkit-scrollbar-track { /* фон */
+  background: #acacac;
+}/*# sourceMappingURL=ganttChart.css.map */

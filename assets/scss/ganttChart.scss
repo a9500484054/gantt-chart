@@ -1,0 +1,106 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.gantt-chart {
+    // overflow-x: scroll;
+    // overflow-y: hidden;
+    // height: 90vh;
+    background: #fff    ;
+
+    &__table {
+        position: relative;
+    }
+    &__head {
+        position: sticky;
+        top: 0;
+        background-color: #ffffff;
+        z-index: 99999;
+        // th {
+        //     background-color: #fff
+        // }
+    }
+    &__col {
+        transition-duration: .5s;  
+      &:hover {
+        background: #d3d3d352;
+      }
+    };
+    &__col--active {
+        position: relative;
+        background: #cdefd082 !important;
+        &:hover {
+            background: #8ae99282 !important;  
+        }
+        &:hover > .gantt-chart__info {
+            display: flex;
+            opacity: 1;
+            z-index: 100;
+        };
+    };
+    &__info {
+        opacity: 0;
+        flex-direction: column;
+        position: absolute; 
+       
+        z-index: -1;
+    }
+    &__info-list {
+        li {
+            width: 300px;
+            margin-bottom: 16px;
+        };
+    };
+    &__btn-view {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+        padding: 0;
+        z-index: 999;
+    }
+
+
+};
+
+.view-card {
+    width: 360px;
+    position: fixed;
+    bottom: -16px;
+    right: 16px;
+    z-index: -1;
+    opacity: 0;
+    transition-duration: .5s;  
+    z-index: -1;
+    &--active {
+        opacity: 1;
+        z-index: 99999;
+    }
+    &__number { 
+        border: none !important;
+        background-color: transparent;
+        font-size: 42px;
+        font-weight: bold;
+        box-shadow: none;
+    }
+};
+
+.styled-scrollbars {
+    /* плашка-бегунок и фон */
+    scrollbar-color: #999 #d4d4d4;
+  }
+  .styled-scrollbars::-webkit-scrollbar {
+    width: 8px; /* в основном для вертикальных полос прокрутки */
+    height: 8px; /* в основном для горизонтальных полос прокрутки */
+  }
+  .styled-scrollbars::-webkit-scrollbar-thumb { /* плашка-бегунок */
+    background: #999;
+  }
+  .styled-scrollbars::-webkit-scrollbar-track { /* фон */
+    background: #acacac;
+  }
