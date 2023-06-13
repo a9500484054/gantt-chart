@@ -137,6 +137,7 @@ export default class GanttChartClass {
             // const ulElement1 = this.createElement('table','gantt-chart__table-operation');
             const tableOperationsElement1 = this.createElement('table','gantt-chart__table-operation');
             tableOperationsElement1.classList.add('table-bordered');
+            tableOperationsElement1.style.width = `100%`;
             const theadOperationsElement1 = this.createElement('thead','gantt-chart__thead-operation');
             const tbodyOperationsElement1 = this.createElement('tbody','gantt-chart__tbody-operation');
             const trOperationsElement1 = this.createElement('tr','gantt-chart__tr-operation');
@@ -166,9 +167,10 @@ export default class GanttChartClass {
             let hoursArray = []
             operations.forEach(item => hoursArray.push(this.millisecondsToHours(item.compliance_rate)));
             let maxHours = Math.max(...hoursArray);
-
+            console.log(date1)
+            console.log(date1.utc().format('h:mm a'))
             for (let i = 0; i < maxHours; i++) {
-                const thElement1 = this.createElement('th','gantt-chart__info-item', `${date1.utc().hours(i).format('h:00')}`);
+                const thElement1 = this.createElement('th','gantt-chart__info-item', `${date1.utc().add(i, 'hour').format('HH:00')}`);
                 trOperationsElement1.appendChild(thElement1);
             }
 
@@ -179,11 +181,18 @@ export default class GanttChartClass {
                 const tdElement2 = this.createElement('td','gantt-chart__info-item', item.name);
                 trOperationsElement.appendChild(tdElement1);
                 trOperationsElement.appendChild(tdElement2);
+                let color = this.getRandomColor();
                 for (let i = 0; i < time; i++) {
                     const tdElement3 = this.createElement('td','gantt-chart__info-item');
-                    tdElement3.style.background = "red";
+                    tdElement3.style.background = color;
                     trOperationsElement.appendChild(tdElement3);
                 }
+                for (let i = 0; i < maxHours - time; i++) {
+                    const tdElement3 = this.createElement('td','gantt-chart__info-item');
+                    trOperationsElement.appendChild(tdElement3);
+                }
+
+
                 tbodyOperationsElement1.appendChild(trOperationsElement);
             });
 
@@ -194,17 +203,17 @@ export default class GanttChartClass {
             // };
 
     
-            console.log(date1)
-            console.log(date1.utc().format('h:mm a'))
+
             if(date1.format('YYYY-MM-DD') === date2.format('YYYY-MM-DD')) {
                 const tdElement = this.createElement('td','gantt-chart__col--active');
                 tdElement.setAttribute('data-date', `${this.dateRange[i]}`);
 
                 const divElement1 = this.createElement('div', "card");
+                divElement1.style.minWidth = '600px';
                 divElement1.classList.add("gantt-chart__info");
                 const divElement2 = this.createElement('div',`card-body`);
                 const h4Element1 = this.createElement('h4',`mb-2`, item.name); 
-                const timeElement1 = this.createElement('time',"mb-2", date1.utc().format('Do MMMM YYYY, h:00 a'));
+                const timeElement1 = this.createElement('time',"mb-2", date1.utc().format('Do MMMM YYYY'));
                 timeElement1.classList.add("d-block");
 
                 divElement2.appendChild(h4Element1);
@@ -244,4 +253,13 @@ export default class GanttChartClass {
         return hours
     }
 
+    getRandomColor() {
+        let red = Math.floor(Math.random() * 256);
+        let green = Math.floor(Math.random() * 256);
+        let blue = Math.floor(Math.random() * 256);
+
+        let colorHex = '#' + red.toString(16).padStart(2, '0') + green.toString(16).padStart(2, '0') + blue.toString(16).padStart(2, '0');
+
+        return colorHex;
+    }
 }

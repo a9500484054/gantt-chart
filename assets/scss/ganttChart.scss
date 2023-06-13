@@ -104,3 +104,10 @@ input::-webkit-inner-spin-button {
   .styled-scrollbars::-webkit-scrollbar-track { /* фон */
     background: #acacac;
   }
+
+  .gantt-chart__table-operation {
+    th, td {
+        padding: 10px;
+        text-align: center;
+    }
+  }
